@@ -61,3 +61,11 @@ Nodemon持续监听js文件，响应变化
 npm i -g nodemon
 ```
 
+全局安装experss生成器 脚手架
+
+```
+npm i express-generator -g
+
+express my-app --view=ejs	// 创建项目
+```
+
