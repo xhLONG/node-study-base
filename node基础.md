@@ -1,6 +1,6 @@
 # Node.js基础
 
-简介
+## 简介
 
 ```
 node本身是基于CommonJs规范设计的，所以node是模块的组成
@@ -68,4 +68,63 @@ npm i express-generator -g
 
 express my-app --view=ejs	// 创建项目
 ```
+
+
+
+## mongo db
+
+Key-value型的数据库，非关系型数据库，对node更加友好，前端上手也更快
+
+安装mongoose连接数据库
+
+```
+npm i mongoose
+```
+
+
+
+## multer 上传文件
+
+```
+npm i multer --save
+```
+
+
+
+## apidoc接口文档
+
+全局安装apidoc
+
+```
+npm i apidoc -g
+```
+
+Vscode 安装插件 acidic snippets 快速填写接口配置
+
+输出接口文档
+
+```
+apidoc -i src/ -o doc/
+```
+
+当前文件夹新建apidoc.json配置接口文档
+
+```
+{
+  "name": "****接口文档",
+  "version": "1.0.0",
+  "description": "关于****的接口文档描述",
+  "title": "****"
+}
+```
+
+**d**
+
+**开始检查收录** \n
+
+**待检查收录数量：**${linkList.length}\n
+
+**开始时间：**${nowDate.toLocaleString()}\n
+
+**${isSuccessful ? '附加信息' : '错误信息'}：**${info || '无'}\n`
 

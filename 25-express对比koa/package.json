@@ -1,0 +1,15 @@
+{
+  "name": "express-vs-koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01-express-同步.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xhlong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "koa": "^2.13.4"
+  }
+}
