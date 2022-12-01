@@ -118,13 +118,5 @@ apidoc -i src/ -o doc/
 }
 ```
 
-**d**
 
-**开始检查收录** \n
-
-**待检查收录数量：**${linkList.length}\n
-
-**开始时间：**${nowDate.toLocaleString()}\n
-
-**${isSuccessful ? '附加信息' : '错误信息'}：**${info || '无'}\n`
 
