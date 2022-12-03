@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script>
+    axios.interceptors.request.use(function (config) {
+      const token = localStorage.getItem('Authorization')
+      config.headers.Authorization = `Bearer ${token}`
+      return config;
+    }, function (error) {
+      return Promise.reject(error);
+    });
+
+    axios.interceptors.response.use(function (response) {
+      const Authorization = response.headers.authorization
+      console.log(response.headers)
+      Authorization && localStorage.setItem('Authorization', Authorization)
+      return response;
+    }, function (error) {
+      if(error.response.status === 401){
+        localStorage.removeItem('Authorization')
+        location.href = '/login'
+      }
+      return Promise.reject(error);
+    });
+  </script>
+</head>
+<body>
+  <div>
+    <h1>home ejs模版页面</h1>
+    <p>用户：<%= username %></p>
+  </div>
+
+  <script>
+    axios.get('/list').then(res => {
+      console.log(res.data)
+    })
+
+  </script>
+</body>
+</html>

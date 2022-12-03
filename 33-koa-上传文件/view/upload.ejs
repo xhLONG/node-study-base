@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script>
+    axios.interceptors.request.use(function (config) {
+      const token = localStorage.getItem('Authorization')
+      config.headers.Authorization = `Bearer ${token}`
+      return config;
+    }, function (error) {
+      return Promise.reject(error);
+    });
+
+    axios.interceptors.response.use(function (response) {
+      const Authorization = response.headers.authorization
+      console.log(response.headers)
+      Authorization && localStorage.setItem('Authorization', Authorization)
+      return response;
+    }, function (error) {
+      if(error.response.status === 401){
+        localStorage.removeItem('Authorization')
+        location.href = '/login'
+      }
+      return Promise.reject(error);
+    });
+  </script>
+</head>
+<body>
+  <div>
+    <h1>upload ejs模版页面</h1>
+  </div>
+  <div>
+    上传图片<input type="file" id="ipt">
+    <button onclick="submit()">提交</button>
+  </div>
+  <div>
+    上传多张图片<input type="file" id="ipt-multi" multiple>
+    <button onclick="submitMulti()">提交</button>
+  </div>
+
+  <script>
+    function submit(){
+      const $ipt = document.querySelector('#ipt')
+      console.log($ipt.files)
+      const formData = new FormData()
+      formData.append('img', $ipt.files[0])
+      axios.post('/user/unload_img', formData).then(res => {
+        console.log(res.data)
+      })
+    }
+
+    function submitMulti(){
+      const $ipt = document.querySelector('#ipt-multi')
+      console.log($ipt.files)
+      const formData = new FormData()
+      formData.append('imgs', $ipt.files)
+      for(let i=0; i<$ipt.files.length; i++){
+        formData.append('imgs', $ipt.files[i])
+      }
+      // formData.append('imgs', Object.keys($ipt.files).map(item => $ipt.files[item]))
+      axios.post('/api/photos/upload', formData).then(res => {
+        console.log(res.data)
+      })
+    }
+  </script>
+</body>
+</html>
