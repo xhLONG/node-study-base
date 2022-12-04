@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>学生管理</h1>
+
+  <div class="add-student">
+    <div>
+      <label for="stu-name">姓名</label>
+      <input type="text" id="stu-name">
+    </div>
+    <div>
+      <label for="stu-score">分数</label>
+      <input type="text" id="stu-score">
+    </div>
+    <div>
+      <label for="stu-classid">班级id</label>
+      <input type="text" id="stu-classid">
+    </div>
+    <button onclick="addStudent()">提交</button>
+  </div>
+
+  <div class="get-student">
+    <table class="student-table" border="1">
+      <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>分数</th>
+        <th>班级</th>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    function addStudent(){
+      const name = document.querySelector('#stu-name').value
+      const score = document.querySelector('#stu-score').value
+      const class_id = document.querySelector('#stu-classid').value
+
+      axios.post('/student', {
+        name,
+        score,
+        class_id
+      }).then(res => {
+        console.log(res.data)
+      })
+    }
+
+    function getStudent(){
+      axios.get('/student').then(res => {
+        console.log(res.data)
+        let html = ''
+        if(res.data.ok){
+          res.data.data.forEach(item => {
+            html += `<tr><td>${item.id}</td><td>${item.name}</td><td>${item.score}</td><td>${item.class_id}</td></tr>`
+          })
+          document.querySelector('.student-table').innerHTML += html
+        }
+      })
+    }
+    getStudent()
+  </script>
+</body>
+</html>
