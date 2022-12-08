@@ -1,0 +1,23 @@
+{
+  "name": "node-study-base",
+  "version": "1.0.0",
+  "description": "node基础内容学习",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "pre-commit-log": "node "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xhLONG/node-study-base.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xhLONG/node-study-base/issues"
+  },
+  "homepage": "https://github.com/xhLONG/node-study-base#readme",
+  "devDependencies": {
+    "husky": "^8.0.2"
+  }
+}
