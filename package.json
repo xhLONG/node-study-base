@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "pre-commit-log": "node "
+    "pre-commit-log": "node preCommitLog.js"
   },
   "repository": {
     "type": "git",
